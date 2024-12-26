@@ -1,0 +1,73 @@
+
+services:
+
+
+  backend_service:
+    build:
+      context: ./backend
+    restart: always
+    volumes:
+      - /Users/pirshtuk/Documents/Software/live-fire-by/backend:/app
+
+    env_file: 
+      - ./backend/.env
+    
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      - main_postgres
+      - minio
+
+    networks:
+      - default
+    dns:
+      - 8.8.8.8
+
+  frontend_service:
+    build:
+      context: ./frontend
+    restart: always
+    ports:
+      - "3000:3000"
+
+
+  main_postgres:
+    image: postgres
+    restart: always
+    volumes:
+      - type: volume
+        source: postgres_data
+        target: /var/lib/postgresql/data
+    env_file:
+      - ./backend/.env
+    ports:
+      - "5432:5432"
+
+
+  minio:
+   image: minio/minio:latest
+   command: server --console-address ":9001" /data/
+   ports:
+     - "9000:9000"
+     - "9001:9001" # Закрыть в продакшене (Если не будет требоваться управление файлами через Web)
+   env_file:
+     - ./backend/.env
+   volumes:
+     - minio_data:/data
+   healthcheck:
+     test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+     interval: 30s
+     timeout: 20s
+     retries: 3
+
+
+
+volumes:
+  postgres_data:
+  minio_data:
+
+
+networks:
+  default:
+
