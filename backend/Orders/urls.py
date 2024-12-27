@@ -20,4 +20,7 @@ from . import views
 
 urlpatterns = [
     path('get_orders/', views.OrdersView.as_view(), name='get_orders'),
+    
+    path('get_order/', views.OrderView.as_view(), name='get_order'),
+    path('create_order/', views.OrderView.as_view(), name='create_order'),
 ]

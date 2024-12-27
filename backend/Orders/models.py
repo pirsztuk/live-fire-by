@@ -14,6 +14,7 @@ class Orders(models.Model):
 
     class OrderStatusChoices(models.TextChoices):
         IN_PROGRESS = 'in_progress', 'В процессе'
+        PACKED = 'packed', 'Собран'
         COMPLETED = 'completed', 'Завершен'
         CANCELLED = 'cancelled', 'Отменен'
 

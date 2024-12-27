@@ -26,7 +26,7 @@ class CustomerView(APIView):
 
         fields = ['customer_id']
 
-        if global_funcs.check_fields(request, "GET", fields):
+        if global_funcs.check_fileds_in_request(request, "GET", fields):
 
             if request.GET.get('customer_id').isdigit():
                 if Customers.objects.filter(id=request.GET.get('customer_id')).exists():
@@ -63,13 +63,19 @@ class CustomerView(APIView):
         form = CustomerUpdateForm(request.POST)
 
         if form.is_valid():
-            if Customers.objects.filter(id=form.cleaned_data['id']).exists():
-                customer = Customers.objects.get(id=form.cleaned_data['id'])
-                customer.Name = form.cleaned_data.get('Name', customer.Name)
-                customer.Email = form.cleaned_data.get('Email', customer.Email)
-                customer.Phone = form.cleaned_data.get('Phone', customer.Phone)
-                customer.Address = form.cleaned_data.get('Address', customer.Address)
+            if Customers.objects.filter(id=form.cleaned_data['customer_id']).exists():
+                customer = Customers.objects.get(id=form.cleaned_data['customer_id'])
+
+                if form.cleaned_data.get('Name') is not None:
+                    customer.Name = form.cleaned_data.get('Name')
+                if form.cleaned_data.get('Email') is not None:
+                    customer.Email = form.cleaned_data.get('Email')
+                if form.cleaned_data.get('Phone') is not None:
+                    customer.Phone = form.cleaned_data.get('Phone')
+                if form.cleaned_data.get('Address') is not None:
+                    customer.Address = form.cleaned_data.get('Address')
                 customer.save()
+
                 return standard_response(message='Customer updated')
             else:
                 return standard_response(message='Customer not found', status_code=status.HTTP_404_NOT_FOUND)
@@ -81,10 +87,10 @@ class CustomerView(APIView):
 
         fields = ['customer_id']
 
-        if global_funcs.check_fields(request, "DELETE", fields):
-            if request.GET.get('customer_id').isdigit():
-                if Customers.objects.filter(id=request.GET.get('customer_id')).exists():
-                    customer = Customers.objects.get(id=request.GET.get('customer_id'))
+        if global_funcs.check_fileds_in_request(request, "DELETE", fields):
+            if type(request.data.get('customer_id')) == int or request.data.get('customer_id').isdigit():
+                if Customers.objects.filter(id=request.data.get('customer_id')).exists():
+                    customer = Customers.objects.get(id=request.data.get('customer_id'))
                     customer.delete()
                     return standard_response(message='Customer deleted')
                 else:

@@ -8,8 +8,8 @@ class CustomerForm(forms.Form):
 
 
 class CustomerUpdateForm(forms.Form):
-    id = forms.IntegerField()
-    Name = forms.CharField(required=False)
-    Email = forms.EmailField(required=False)
-    Phone = forms.CharField(required=False)
-    Address = forms.CharField(required=False)
+    customer_id = forms.IntegerField()
+    Name = forms.CharField(required=False, empty_value=None)
+    Email = forms.EmailField(required=False, empty_value=None)
+    Phone = forms.CharField(required=False, empty_value=None)
+    Address = forms.CharField(required=False, empty_value=None)
