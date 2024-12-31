@@ -7,7 +7,9 @@ services:
       context: ./backend
     restart: always
     volumes:
-      - /Users/pirshtuk/Documents/Software/live-fire-by/backend:/app
+      - type: bind # УБРАТЬ
+        source: ./backend # В
+        target: /app # ПРОДАКШЕНЕ
 
     env_file: 
       - ./backend/.env
