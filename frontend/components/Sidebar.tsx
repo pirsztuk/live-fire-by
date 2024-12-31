@@ -4,7 +4,7 @@ import { Home, Package, Users, ShoppingCart } from 'lucide-react'
 export function Sidebar() {
   return (
     <div className="w-64 bg-gray-100 h-full p-4">
-      <h1 className="text-2xl font-bold mb-8">Candle Shop Admin</h1>
+      <h1 className="text-2xl font-bold mb-8">Live Fire By Admin</h1>
       <nav>
         <ul className="space-y-2">
           <li>

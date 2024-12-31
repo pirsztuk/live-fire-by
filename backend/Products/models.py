@@ -26,3 +26,6 @@ class Products(models.Model):
     Image = models.ImageField(upload_to=upload_product)
 
     InStock = models.IntegerField(default=0)
+
+    CreatedAt = models.DateTimeField(auto_now_add=True)
+    UpdatedAt = models.DateTimeField(auto_now=True)

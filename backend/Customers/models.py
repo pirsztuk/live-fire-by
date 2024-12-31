@@ -7,3 +7,6 @@ class Customers(models.Model):
     Email = models.EmailField(max_length=255, null=True)
     Phone = models.CharField(max_length=255, null=True)
     Address = models.CharField(max_length=255, null=True)
+
+    CreatedAt = models.DateTimeField(auto_now_add=True)
+    UpdatedAt = models.DateTimeField(auto_now=True)

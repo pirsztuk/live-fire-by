@@ -46,13 +46,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'storages',
-    'celery',
 
 
     'Auth',
     'Products',
     'Orders',
     'Customers',
+    'Dashboard',
 ]
 
 MIDDLEWARE = [

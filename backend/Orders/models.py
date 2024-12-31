@@ -21,6 +21,7 @@ class Orders(models.Model):
     OrderStatus = models.CharField(max_length=255, choices=OrderStatusChoices.choices)
     
     OrderTotal = models.DecimalField(max_digits=10, decimal_places=2)
+    OrderCosts = models.DecimalField(max_digits=10, decimal_places=2)
 
 
 class OrderItems(models.Model):

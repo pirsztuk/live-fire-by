@@ -23,4 +23,6 @@ urlpatterns = [
     
     path('get_order/', views.OrderView.as_view(), name='get_order'),
     path('create_order/', views.OrderView.as_view(), name='create_order'),
+    path('update_order/', views.OrderView.as_view(), name='update_order'),
+    path('delete_order/', views.OrderView.as_view(), name='delete_order'),
 ]
