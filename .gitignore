@@ -1,2 +1,8 @@
 *.env
 *node_modules/*
+
+# Игнорируем все в папке migrations
+**/migrations/*
+
+# Исключаем из игнорирования __init__.py
+!**/migrations/__init__.py
